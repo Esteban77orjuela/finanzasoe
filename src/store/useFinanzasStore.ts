@@ -19,6 +19,8 @@ type FinanzasStore = {
   calcularTotalGastadoPorMes: (mes: string) => number;
   calcularTotalPresupuestadoPorMes: (mes: string) => number;
   calcularDiferenciaPorMes: (mes: string) => number;
+  calcularTotalPresupuestadoPorMesYQuincena: (mes: string, quincena: "primera" | "segunda") => number;
+  calcularTotalGastadoPorMesYQuincena: (mes: string, quincena: "primera" | "segunda") => number;
 };
 
 type FinanzasState = {

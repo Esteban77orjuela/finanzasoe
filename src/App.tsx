@@ -10,6 +10,8 @@ import ResumenMensual from "./components/ResumenMensual";
 import ListaGastos from "./components/ListaGastos";
 import ThemeToggle from "./components/ThemeToggle";
 import CalculadoraFlotante from "./components/CalculadoraFlotante";
+import { Toaster } from "react-hot-toast";
+import ResumenFinanciero from "./components/ResumenFinanciero";
 
 // Función principal del componente App
 function App() {
@@ -33,6 +35,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg p-4 transition-colors duration-200">
+      <Toaster position="top-right" />
+      {/* Encabezado de la aplicación */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-[#536EC7] dark:text-dark-text">
           Mis Finanzas
@@ -49,6 +53,7 @@ function App() {
           <h2 className="text-xl font-semibold mb-4 text-light-accent dark:text-dark-accent">
             Resumen Mensual
           </h2>
+          <ResumenFinanciero />
           <ResumenMensual />
         </div>
 
