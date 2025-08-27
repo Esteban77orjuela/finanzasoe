@@ -14,6 +14,7 @@ type FinanzasStore = {
   agregarPresupuesto: (presupuesto: Presupuesto) => void;
   agregarGasto: (gasto: Gasto) => void;
   eliminarGasto: (id: string) => void;
+  editarPresupuesto: (presupuesto: Presupuesto) => void;
   editarGasto: (gasto: Gasto) => void;
 
   calcularTotalGastadoPorMes: (mes: string) => number;
@@ -137,6 +138,15 @@ export const useFinanzasStore = create<FinanzasStore>()(
         set((state) => ({
           gastos: state.gastos.map((g) =>
             g.id === gasto.id ? gasto : g
+          ),
+        }));
+      },
+
+      // editar un presupuesto
+      editarPresupuesto: (presupuesto) => {
+        set((state) => ({
+          presupuestos: state.presupuestos.map((p) =>
+            p.id === presupuesto.id ? presupuesto : p
           ),
         }));
       },

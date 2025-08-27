@@ -37,7 +37,7 @@ function App() {
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg p-4 transition-colors duration-200">
       <Toaster position="top-right" />
       {/* Encabezado de la aplicación */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-center gap-8 items-center mb-6">
         <h1 className="text-3xl font-bold text-[#536EC7] dark:text-dark-text">
           Mis Finanzas
         </h1>
@@ -50,7 +50,7 @@ function App() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Sección de Resumen - Ocupa todo el ancho en dispositivos pequeños */}
         <div className="col-span-1 md:col-span-2 lg:col-span-3 bg-light-surface dark:bg-dark-surface rounded-xl shadow-md p-4 transition-colors duration-200">
-          <h2 className="text-xl font-semibold mb-4 text-light-accent dark:text-dark-accent">
+          <h2 className="flex items-center justify-center text-xl font-semibold mb-4 text-light-accent dark:text-dark-accent">
             Resumen Mensual
           </h2>
           <ResumenFinanciero />

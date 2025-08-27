@@ -36,37 +36,37 @@ const ResumenFinanciero = () => {
     <div className="flex flex-col items-center">
       <div className="flex gap-2 mb-4" >
             <button 
-            className={filtro === "mes" ? "bg-blue-500 text-white px-3 py-1 rounded" : "bg-gray-200 px-3 py-1 rounded"}
+            className={filtro === "mes" ? "bg-sky-500 bg-gra text-white px-3 py-1 rounded" : "bg-gray-200 dark:bg-dark-bg px-3 py-1 rounded"}
             onClick={()=> setFiltro ("mes")}
             >Mes</button>
             <button
-            className={filtro === "primera" ? "bg-blue-500 text-white px-3 py-1 rounded" : "bg-gray-200 px-3 py-1 rounded"}
+            className={filtro === "primera" ? "bg-sky-500 text-white px-3 py-1 rounded" : "bg-gray-200 dark:bg-dark-bg px-3 py-1 rounded"}
             onClick={()=> setFiltro ("primera")}
             
             >1ra Quincena</button>
             <button
-            className={filtro === "segunda" ? "bg-blue-500 text-white px-3 py-1 rounded" : "bg-gray-200 px-3 py-1 rounded"}
+            className={filtro === "segunda" ? "bg-sky-500 text-white px-3 py-1 rounded" : "bg-gray-200 dark:bg-dark-bg px-3 py-1 rounded"}
             onClick={()=> setFiltro ("segunda")}
             >2da Quincena</button>
         </div>
 
     <div className="flex gap-6 mt-4">
       {/* Balance Total */}
-      <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-400 min-w-[220px]">
+      <div className="bg-light-surface dark:bg-dark-surface rounded-xl shadow-md p-6 border-l-4 border-blue-400 min-w-[220px]">
         <div className="text-xl font-semibold">Balance Total</div>
         <div className="text-3xl font-bold text-green-500 mt-2">
           {formatoMoneda(balance)}
         </div>
       </div>
       {/* Ingresos */}
-      <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-400 min-w-[220px]">
+      <div className="bg-light-surface dark:bg-dark-surface rounded-xl shadow-md p-6 border-l-4 border-green-400 min-w-[220px]">
         <div className="text-xl font-semibold">Ingresos (Mes)</div>
         <div className="text-3xl font-bold text-green-500 mt-2">
           {formatoMoneda(ingresos)}
         </div>
       </div>
       {/* Gastos */}
-      <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-400 min-w-[220px]">
+      <div className="bg-light-surface dark:bg-dark-surface rounded-xl shadow-md p-6 border-l-4 border-red-400 min-w-[220px]">
         <div className="text-xl font-semibold">Gastos (Mes)</div>
         <div className="text-3xl font-bold text-red-500 mt-2">
           {formatoMoneda(gastos)}

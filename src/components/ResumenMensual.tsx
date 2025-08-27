@@ -2,15 +2,21 @@
 
 import { useState, useMemo } from "react";
 import { useFinanzasStore } from "../store/useFinanzasStore";
+import { Gasto, Presupuesto } from "../types";
+import EditarPresupuesto from "./EditarPresupuesto";
+import EditarGasto from "./EditarGasto";
 
 // Función principal del componente ResumenMensual
 function ResumenMensual() {
 
   // Estados para manejar la quincena seleccionada y el mes
+  const [gastoEditando, setGastoEditando] = useState<Gasto | null>(null);
   const [quincenaSeleccionada, setQuincenaSeleccionada] = useState<"primera" | "segunda" | "todas">("primera");
+  const [presupuestoEditando, setPresupuestoEditando] = useState<Presupuesto | null>(null);
   const { categorias, presupuestos, gastos } = useFinanzasStore();
   const eliminarCategoria = useFinanzasStore((state) => state.eliminarCategoria);
   const eliminarGasto = useFinanzasStore((state) => state.eliminarGasto);
+  const editarGasto = useFinanzasStore((state) => state.editarGasto);
   const [mesSelecionado, setMesSelecionado] = useState<string>(
     new Date().toLocaleString("es", { month: "long" })
   );
@@ -146,7 +152,7 @@ const resumenPorCategoria = useMemo(() => {
 
   return (
     <div className="w-full max-w-4xl mx-auto mt-8 px-4">
-      <h2 className="text-2xl font-bold mb-6 text-center text-[#536EC7] tracking-wider">
+      <h2 className="text-2xl font-bold mb-6 text-center text-[#536EC7] dark:text-cyan-300 tracking-wider">
         RESUMEN FINANCIERO
       </h2>
   
@@ -282,31 +288,53 @@ const resumenPorCategoria = useMemo(() => {
       (quincenaSeleccionada === "todas" || g.quincena === quincenaSeleccionada)
   )
   .map((gasto) => (
-    <button
-      key={gasto.id}
-      onClick={() => {
-        if (window.confirm("¿Eliminar este gasto?")) {
-          eliminarGasto(gasto.id);
-        }
-      }}
-      className="text-red-600 hover:text-red-800 mx-1"
-      aria-label="Eliminar gasto"
-    >
-      🗑️
-    </button>
+    <div key={gasto.id} className="inline-flex">
+      <button
+        onClick={() => {
+          if (window.confirm("¿Eliminar este gasto?")) {
+            eliminarGasto(gasto.id);
+          }
+        }}
+        className="text-red-600 hover:text-red-800 mx-1"
+        aria-label="Eliminar gasto"
+      >
+        🗑️
+      </button>
+      <button
+        onClick={() => {
+          setGastoEditando(gasto);
+        }}
+        className="text-blue-600 hover:text-blue-800 mx-1"
+        aria-label="Editar gasto"
+      >
+        ✏️
+      </button>
+    </div>
   ))}
             {presupuestoFila && (
-              <button
-                onClick={() => {
-                  if (window.confirm("¿Eliminar este presupuesto?")) {
-                    useFinanzasStore.getState().eliminarPresupuesto(presupuestoFila.id);
-                  }
-                }}
-                className="text-red-600 hover:text-red-800"
-                aria-label="Eliminar presupuesto"
-              >
-                🗑️
-              </button>
+              <div className="inline-flex">
+                <button
+                  onClick={() => {
+                    if (window.confirm("¿Eliminar este presupuesto?")) {
+                      useFinanzasStore.getState().eliminarPresupuesto(presupuestoFila.id);
+                    }
+                  }}
+                  className="text-red-600 hover:text-red-800 mx-1"
+                  aria-label="Eliminar presupuesto"
+                >
+                  🗑️
+                </button>
+                <button
+                  onClick={() => {
+                    setPresupuestoEditando(presupuestoFila);
+                    
+                  }}
+                  className="text-blue-600 hover:text-blue-800 mx-1"
+                  aria-label="Editar presupuesto"
+                >
+                  ✏️
+                </button>
+              </div>
             )}
           </td>
         </tr>
@@ -334,6 +362,24 @@ const resumenPorCategoria = useMemo(() => {
           </tfoot>
         </table>
       </div>
+      {presupuestoEditando && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <EditarPresupuesto 
+      presupuesto={presupuestoEditando} 
+      onGuardar={() => setPresupuestoEditando(null)} 
+      onCancelar={() => setPresupuestoEditando(null)} 
+    />
+  </div>
+)}
+{gastoEditando && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <EditarGasto 
+      gasto={gastoEditando} 
+      onGuardar={() => setGastoEditando(null)} 
+      onCancelar={() => setGastoEditando(null)} 
+    />
+  </div>
+)}
     </div>
   );
 }
