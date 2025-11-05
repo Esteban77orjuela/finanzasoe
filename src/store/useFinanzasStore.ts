@@ -12,7 +12,8 @@ type FinanzasStore = {
   agregarCategoria: (categoria: Categoria) => void;
   eliminarCategoria: (id: string) => void;
   editarCategoria: (categoria: Categoria) => void;
-  agregarPresupuesto: (presupuesto: Presupuesto) => void;
+
+agregarPresupuesto: (presupuesto: Presupuesto) => void;
   agregarGasto: (gasto: Gasto) => void;
   eliminarGasto: (id: string) => void;
   editarPresupuesto: (presupuesto: Presupuesto) => void;
